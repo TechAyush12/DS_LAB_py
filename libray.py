@@ -1,37 +1,37 @@
-# Borrow counts of library members
-books = [3, 0, 5, 2, 0, 4, 3, 5, 1, 3, 2]
+n = int(input("Enter number of books: "))
 
-# Average number of books borrowed
-total = sum(books)
-average = total / len(books)
-print("Average books borrowed =", average)
+book_names = []
+borrow_counts = []
 
-# Highest and lowest borrow count
-print("Highest borrow count =", max(books))
-print("Lowest borrow count =", min(books))
+for i in range(n):
+    name = input("Enter book name: ")
+    count = int(input("Enter borrow count: "))
+    book_names.append(name)
+    borrow_counts.append(count)
 
-# Members who did not borrow any books
-count = 0
-for i in books:
-    if i == 0:
-        count = count + 1
-print("Members with no borrowed books =", count)
+# 1. Average borrow count
+average = sum(borrow_counts) / n
+print("\nAverage borrow count =", average)
 
-# Finding the mode (most frequent borrow count)
-freq = {}
+# 2. Highest and Lowest borrowed book
+max_count = max(borrow_counts)
+min_count = min(borrow_counts)
 
-for i in books:
-    if i in freq:
-        freq[i] = freq[i] + 1
-    else:
-        freq[i] = 1
+print("Highest borrowed book:", book_names[borrow_counts.index(max_count)], "-", max_count)
+print("Lowest borrowed book:", book_names[borrow_counts.index(min_count)], "-", min_count)
 
-mode = books[0]
-max_count = freq[mode]
+# 3. Count books with zero borrowings
+zero_count = borrow_counts.count(0)
+print("Books not borrowed:", zero_count)
 
-for i in freq:
-    if freq[i] > max_count:
-        max_count = freq[i]
+# 4. Find Mode (Most frequent borrow count)
+mode = borrow_counts[0]
+max_frequency = 0
+
+for i in borrow_counts:
+    frequency = borrow_counts.count(i)
+    if frequency > max_frequency:
+        max_frequency = frequency
         mode = i
 
-print("Most frequently borrowed count =", mode)
+print("Most frequent borrow count (Mode):", mode)
